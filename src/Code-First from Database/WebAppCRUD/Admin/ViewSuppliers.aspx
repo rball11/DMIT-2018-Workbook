@@ -2,35 +2,52 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h1>View Suppliers</h1>
 
-<%--    <asp:GridView ID="SupplierGridView" runat="server" AutoGenerateColumns="False" DataSourceID="SuppliersDataSource" CssClass="table table-hover" HeaderStyle-BackColor="ControlLight">
-        <Columns>
-            <asp:BoundField DataField="SupplierID" HeaderText="SupplierID" SortExpression="SupplierID"></asp:BoundField>
-            <asp:BoundField DataField="CompanyName" HeaderText="CompanyName" SortExpression="CompanyName"></asp:BoundField>
-            <asp:BoundField DataField="ContactName" HeaderText="ContactName" SortExpression="ContactName"></asp:BoundField>
-            <asp:BoundField DataField="ContactTitle" HeaderText="ContactTitle" SortExpression="ContactTitle"></asp:BoundField>
-            <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email"></asp:BoundField>
-            <asp:BoundField DataField="AddressID" HeaderText="AddressID" SortExpression="AddressID"></asp:BoundField>
-            <asp:BoundField DataField="Phone" HeaderText="Phone" SortExpression="Phone"></asp:BoundField>
-            <asp:BoundField DataField="Fax" HeaderText="Fax" SortExpression="Fax"></asp:BoundField>
-        </Columns>
-    </asp:GridView>--%>
-
-    <asp:ListView ID="SuppliersListView" runat="server" DataSourceID="SuppliersDataSource"
+    <asp:ListView ID="SuppliersListView" runat="server"
+        DataSourceID="SuppliersDataSource"
         ItemType="WestWindSystem.Entities.Supplier">
         <LayoutTemplate>
-            <blockquote>
-                <div id="itemPlaceHolder" runat="server"></div>
-            </blockquote>
+            <table class="table table-hover table-condensed">
+                <thead>
+                    <tr>
+                        <th>Supplier ID</th>
+                        <th>Company Name</th>
+                        <th>Contact</th>
+                        <th>Address</th>
+                        <th>Phone / Fax</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="itemPlaceholder" runat="server"></tr>
+                </tbody>
+            </table>
         </LayoutTemplate>
+
         <ItemTemplate>
-            <div>
-                <b><%# Item.CompanyName %></b>
-                &ndash;
-                <i><%# Item.ContactName %></i>
-                (<%# Item.ContactTitle %> - <%# Item.Phone %>)
-            </div>
+            <tr>
+                <td><%# Item.SupplierID %></td>
+                <td><%# Item.CompanyName %></td>
+                <td>
+                    <b><%# Item.ContactName %></b>
+                    &ndash;
+                    <i><%# Item.ContactTitle %></i>
+                    <br />
+                    <%# Item.Email %>
+                </td>
+                <td><%# Item.AddressID %></td>
+                <td>
+                    <%# Item.Phone %>
+                    <br />
+                    <%# Item.Fax %>
+                </td>
+            </tr>
         </ItemTemplate>
     </asp:ListView>
 
     <asp:ObjectDataSource runat="server" ID="SuppliersDataSource" OldValuesParameterFormatString="original_{0}" SelectMethod="ListSuppliers" TypeName="WestWindSystem.BLL.CRUDController"></asp:ObjectDataSource>
+    <asp:ObjectDataSource ID="AddressDataSource" runat="server"
+        OldValuesParameterFormatString="original_{0}"
+        SelectMethod="ListAddresses"
+        TypeName="WestWindSystem.BLL.CRUDController">
+    </asp:ObjectDataSource>
+
 </asp:Content>
