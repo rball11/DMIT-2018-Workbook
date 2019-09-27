@@ -1,6 +1,6 @@
 <Query Kind="Expression">
   <Connection>
-    <ID>05a2444e-14ea-4451-ad3d-3398e9ff7898</ID>
+    <ID>a6d005d1-8751-4e00-96d3-6b4b4c4ca9bf</ID>
     <Persist>true</Persist>
     <Server>.</Server>
     <Database>WestWind</Database>
@@ -9,7 +9,13 @@
 
 // List all the customers grouped by country and region.
 from row in Customers
-group row by new { row.Address.Country, row.Address.Region } into CustomerGroups
+group row by new 
+{ 
+	Nation = row.Address.Country, 
+	row.Address.Region 
+} 
+into CustomerGroups
+
 select new
 {
    Key = CustomerGroups.Key,

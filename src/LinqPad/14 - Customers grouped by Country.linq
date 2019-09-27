@@ -1,6 +1,6 @@
 <Query Kind="Expression">
   <Connection>
-    <ID>05a2444e-14ea-4451-ad3d-3398e9ff7898</ID>
+    <ID>a6d005d1-8751-4e00-96d3-6b4b4c4ca9bf</ID>
     <Persist>true</Persist>
     <Server>.</Server>
     <Database>WestWind</Database>
@@ -9,11 +9,19 @@
 
 // Display all the company names and contact names for our customers, grouped by country
 from row in Customers
-group  row   by   row.Address.Country into CustomersByCountry
+//		Customer	Table<Customer>
+group  row   by   row.Address.Country
+//	  Customer	  [		string		]
 //    \what/      \       how       /
+//				   \      Key      /
+
+	into CustomersByCountry
+//  IGrouping<string, Customer>
+
 select new
 {
-   Country = CustomersByCountry, // the key is "how" we have sorted the data
+   Country = CustomersByCountry.Key, 
+// the key is "how" we have sorted the data
    Customers = from data in CustomersByCountry
                select new
                {
