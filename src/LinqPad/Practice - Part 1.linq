@@ -55,23 +55,21 @@ from product in Products
 					 product.UnitPrice
 				 }
 //I) List the company names of all Suppliers in North America (Canada, USA, Mexico)
-from row in Addresses
+from row in Suppliers
+where row.Address.Country.Contains("Canada") || row.Address.Country.Contains("USA") || row.Address.Country.Contains("Mexico")
 group row by new 
 { 
-	Nation = row.Address.Country, 
-	row.Address.Region 
+	Nation = row.Address.Country
 } 
-into AddressGroups
+into SupplierGroups
 
 select new
 {
-   Key = CustomerGroups.Key,
-   Country = CustomerGroups.Key.Country,
-   Region = CustomerGroups.Key.Region,
-   Customers = from data in CustomerGroups
+   Key = SupplierGroups.Key,
+   Suppliers = from data in SupplierGroups
                select new
                {
                    Company = data.CompanyName,
-                   City = data.Address.City
+				   Country = data.Address.Country
                }
 }
