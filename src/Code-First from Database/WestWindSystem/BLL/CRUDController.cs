@@ -122,17 +122,5 @@ namespace WestWindSystem.BLL
             }
         }
         #endregion
-
-        #region Categories CRUD
-        [DataObjectMethod(DataObjectMethodType.Select)]
-        public List<Category> ListCategories()
-        {
-            using (var context = new WestWindContext())
-            {
-                return context.Categories.ToList();
-            }
-        }
-
-        #endregion
     }
 }
