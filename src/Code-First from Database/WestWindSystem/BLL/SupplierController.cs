@@ -6,12 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using WestWindSystem.DAL;
 using WestWindSystem.ReadModels;
+using WestWindSystem.Entities;
 
 namespace WestWindSystem.BLL
 {
     [DataObject]
-    class SupplierController
+    public class SupplierController
     {
+        [DataObjectMethod(DataObjectMethodType.Select)]
         public List<SupplierSummary> ListSupplierSummary()
         {
             using (var context = new WestWindContext())

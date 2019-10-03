@@ -10,24 +10,24 @@
 namespace WebAppCRUD.Admin {
     
     
-    public partial class ViewAddresses {
+    public partial class SupplierManagement {
         
         /// <summary>
-        /// AddressesGridView control.
+        /// SupplierSummaryRepeater control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView AddressesGridView;
+        protected global::System.Web.UI.WebControls.Repeater SupplierSummaryRepeater;
         
         /// <summary>
-        /// AddressesDataSource control.
+        /// SupplierSummaryDataSource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource AddressesDataSource;
+        protected global::System.Web.UI.WebControls.ObjectDataSource SupplierSummaryDataSource;
     }
 }
