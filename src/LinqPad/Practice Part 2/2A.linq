@@ -1,7 +1,6 @@
 <Query Kind="Expression">
   <Connection>
-    <ID>e076134a-52b5-423d-8e02-29a44a57cdc8</ID>
-    <Persist>true</Persist>
+    <ID>8af4b037-de64-4731-986a-fb3e0756e755</ID>
     <Server>.</Server>
     <Database>WestWind</Database>
   </Connection>
@@ -22,4 +21,17 @@
  */
  
 from region in Regions
-where 
+select new
+{
+	Region = region.RegionDescription,
+	Employees = (from area in region.Territories
+				from manager in area.EmployeeTerritories
+				select manager.Employee.FirstName + " " + manager.Employee.LastName)
+				.Distinct(),
+	Employees2 = from area in region.Territories
+				 from manager in area.EmployeeTerritories
+				 group manager by manager.Employee into areaManagers
+				 select areaManagers.Key.FirstName + " " + areaManagers.Key.LastName
+}
+
+

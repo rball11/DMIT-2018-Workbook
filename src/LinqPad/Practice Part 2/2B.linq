@@ -1,20 +1,22 @@
 <Query Kind="Expression">
   <Connection>
-    <ID>e076134a-52b5-423d-8e02-29a44a57cdc8</ID>
-    <Persist>true</Persist>
+    <ID>8af4b037-de64-4731-986a-fb3e0756e755</ID>
     <Server>.</Server>
     <Database>WestWind</Database>
   </Connection>
 </Query>
 
-// B) List all the Customers by Company Name. Include the Customer's company name, contact name, and other contact information in the result.
-from customer in Customers
+// B) List all the companys sorted by Company Name. Include the company's company name, contact name, and other contact information in the result.
+from company in Customers
 select new
 {
-	CompanyName = customer.CompanyName,
-	ContactName = customer.ContactName,
-	ContactTitle = customer.ContactTitle,
-	ContactEmail = customer.ContactEmail,
-	Phone = customer.Phone,
-	Fax = customer.Fax
+	CompanyName = company.CompanyName,
+	Contact = new 
+			  {
+					Name = company.ContactName,
+					Title = company.ContactTitle,
+					Email = company.ContactEmail,
+					Phone = company.Phone,
+					Fax = company.Fax
+			  }
 }

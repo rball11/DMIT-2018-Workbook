@@ -1,7 +1,6 @@
 <Query Kind="Expression">
   <Connection>
     <ID>8af4b037-de64-4731-986a-fb3e0756e755</ID>
-    <Persist>true</Persist>
     <Server>.</Server>
     <Database>WestWind</Database>
   </Connection>
@@ -25,7 +24,7 @@ from region in Regions
 select new
 {
 	region.RegionDescription,
-	NOofTerritories = region.Territories.Count
+	NOofTerritories = region.Territories.Count()
 }
 //E) List all the region and territory names in a "flat" list
 from data in Territories
@@ -40,36 +39,25 @@ from data in Regions
 select new
 {
    Region = data.RegionDescription,
-   Territory = from territory in data.Territories select territory.TerritoryDescription
+   Territory = from territory in data.Territories 
+   			   select territory.TerritoryDescription
 }
 //G) List all the product names that contain the word "chef" in the name.
 from product in Products
-				 where product.ProductName.Contains("Chef")
-				 select product.ProductName
+where product.ProductName.Contains("Chef")
+select product.ProductName
 //H) List all the discontinued products, specifying the product name and unit price.
 from product in Products
-				 where product.Discontinued.Equals(1)
-				 select new
-				 {
-					 product.ProductName,
-					 product.UnitPrice
-				 }
-//I) List the company names of all Suppliers in North America (Canada, USA, Mexico)
-from row in Suppliers
-where row.Address.Country.Contains("Canada") || row.Address.Country.Contains("USA") || row.Address.Country.Contains("Mexico")
-group row by new 
-{ 
-	Nation = row.Address.Country
-} 
-into SupplierGroups
-
+//where product.Discontinued.Equals(1)
+where product.Discontinued
 select new
 {
-   Key = SupplierGroups.Key,
-   Suppliers = from data in SupplierGroups
-               select new
-               {
-                   Company = data.CompanyName,
-				   Country = data.Address.Country
-               }
+	product.ProductName,
+	product.UnitPrice
 }
+//I) List the company names of all Suppliers in North America (Canada, USA, Mexico)
+from vendor in Suppliers
+where vendor.Address.Country == "Canada"
+	|| vendor.Address.Country == "USA"
+	|| vendor.Address.Country == "Mexico"
+select vendor.CompanyName
