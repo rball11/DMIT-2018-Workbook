@@ -71,6 +71,8 @@ public class OutstandingOrder
     public DateTime RequiredBy { get;set; }
     public int DaysRemaining { get; } // Calculated
     public IEnumerable<OrderItem> OutstandingItems { get;set; }
+    public string FullShippingAddress { get;set; }
+    public string Comments { get;set; }
 }
 ```
 
