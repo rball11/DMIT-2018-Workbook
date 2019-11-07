@@ -54,7 +54,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\DemoController.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="DAL\DemoContext.cs" />
     <Compile Include="Entities\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
