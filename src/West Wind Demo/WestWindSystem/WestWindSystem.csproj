@@ -52,9 +52,11 @@
   <ItemGroup>
     <Compile Include="BLL\AboutController.cs" />
     <Compile Include="BLL\OrderHistoryController.cs" />
+    <Compile Include="BLL\OrderProcessingController.cs" />
     <Compile Include="BLL\ProductManagementController.cs" />
     <Compile Include="BLL\SalesController.cs" />
     <Compile Include="BLL\SetupUserRegistrationController.cs" />
+    <Compile Include="DataModels\OrderItem.cs" />
     <Compile Include="DataModels\DatabaseVersion.cs" />
     <Compile Include="DataModels\EditCustomerOrder.cs" />
     <Compile Include="DataModels\InvoiceHeader.cs" />
