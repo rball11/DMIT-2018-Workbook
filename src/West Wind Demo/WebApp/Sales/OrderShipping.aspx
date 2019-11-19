@@ -10,18 +10,19 @@
             </p>
             <asp:ListView ID="CurrentOrders" runat="server"
                 DataSourceID="SupplierOrdersDataSource"
+                OnItemCommand="CurrentOrders_ItemCommand"
                 ItemType="WestWindSystem.DataModels.OutstandingOrder">
                 <EditItemTemplate>
                     <tr style="">
                         <td>
                             (<asp:Label Text='<%# Item.OrderId %>' runat="server" ID="OrderIdLabel" />)
-                            <asp:Label Text='<%# Item.ShipToName %>' runat="server" ID="ShipToNameLabel" />
+                            <%# Item.ShipToName %>
                         </td>
                         <td>
-                            <asp:Label Text='<%# Item.OrderDate.ToString("MMM dd, yyyy") %>' runat="server" ID="OrderDateLabel" />
+                            <%# Item.OrderDate.ToString("MMM dd, yyyy") %>
                         </td>
                         <td>
-                            <asp:Label Text='<%# Item.RequiredBy.ToString("MMM dd, yyyy") %>' runat="server" ID="RequiredByLabel" />
+                            <%# Item.RequiredBy.ToString("MMM dd, yyyy") %>
                             - in <%# Item.DaysRemaining %> days
                         </td>
                         <td>
@@ -39,7 +40,7 @@
                                 DataSourceID="ShippersDataSource"
                                 DataTextField="Shipper" DataValueField="ShipperId"
                                 AppendDataBoundItems="true">
-                                <asp:ListItem Value="">[Select a Shipper]</asp:ListItem>
+                                <asp:ListItem Value="0">[Select a Shipper]</asp:ListItem>
                             </asp:DropDownList>
                             <asp:GridView ID="ProductsGridView" runat="server"
                                 CssClass="table table-hover table-condensed"
@@ -54,6 +55,7 @@
                                     <asp:BoundField DataField="Outstanding" HeaderText="Outstanding" />
                                     <asp:TemplateField HeaderText="Ship Quantity">
                                         <ItemTemplate>
+                                            <asp:HiddenField ID="ProductId" runat="server" Value="<%# Item.ProductID %>" />
                                             <asp:TextBox ID="ShipQuantity" runat="server"></asp:TextBox>
                                         </ItemTemplate>
                                     </asp:TemplateField>
@@ -79,14 +81,14 @@
                 <ItemTemplate>
                     <tr style="">
                         <td>
-                            (<asp:Label Text='<%# Item.OrderId %>' runat="server" ID="OrderIdLabel" />)
-                            <asp:Label Text='<%# Item.ShipToName %>' runat="server" ID="ShipToNameLabel" />
+                            (<%# Item.OrderId %>)
+                            <%# Item.ShipToName %>
                         </td>
                         <td>
-                            <asp:Label Text='<%# Item.OrderDate.ToString("MMM dd, yyyy") %>' runat="server" ID="OrderDateLabel" />
+                            <%# Item.OrderDate.ToString("MMM dd, yyyy") %>
                         </td>
                         <td>
-                            <asp:Label Text='<%# Item.RequiredBy.ToString("MMM dd, yyyy") %>' runat="server" ID="RequiredByLabel" />
+                            <%# Item.RequiredBy.ToString("MMM dd, yyyy") %>
                             - in <%# Item.DaysRemaining %> days
                         </td>
                         <td>
