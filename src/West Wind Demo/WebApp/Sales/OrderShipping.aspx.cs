@@ -16,7 +16,7 @@ namespace WebApp.Sales
         {
             if (!Request.IsAuthenticated || !User.IsInRole(Settings.SupplierRole))
                 Response.Redirect("~", true);
-            if (!IsPostBack)
+            if(!IsPostBack)
             {
                 // Load up the info on the supplier
                 // TODO: Replace hard-coded supplier ID with the user's supplier ID
@@ -27,7 +27,7 @@ namespace WebApp.Sales
 
         protected void CurrentOrders_ItemCommand(object sender, ListViewCommandEventArgs e)
         {
-            if (e.CommandName == "Ship")
+            if(e.CommandName == "Ship")
             {
                 // Gather information from the form to send to the BLL for shipping
                 // - ShipOrder(int orderId, ShippingDirections shipping, List<ShippedItem> items)
@@ -52,15 +52,15 @@ namespace WebApp.Sales
 
                 List<ShippedItem> goods = new List<ShippedItem>();
                 GridView gv = e.Item.FindControl("ProductsGridView") as GridView;
-                if (gv != null)
+                if(gv != null)
                 {
-                    foreach (GridViewRow row in gv.Rows)
+                    foreach(GridViewRow row in gv.Rows)
                     {
                         // get product id and ship qty
                         short quantity;
                         HiddenField prodId = row.FindControl("ProductId") as HiddenField;
                         TextBox qty = row.FindControl("ShipQuantity") as TextBox;
-                        if (prodId != null && qty != null && short.TryParse(qty.Text, out quantity))
+                        if(prodId != null && qty != null && short.TryParse(qty.Text, out quantity))
                         {
                             ShippedItem item = new ShippedItem
                             {
